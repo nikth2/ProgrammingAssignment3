@@ -35,5 +35,14 @@ best <-  function(state,outcome){
         }
         
         state_data<-outcome_data[outcome_data$State==state,]
-        state_data[[outcome_name]]
+        #outcome_data_per_state <- state_data[[outcome_name]]
+        
+            
+        state_data_no_NAs <- state_data[state_data[[outcome_name]]!='Not Available',]
+        best_hospital <- head(state_data_no_NAs[order(as.numeric(state_data_no_NAs[[outcome_name]]),na.last = NA),])
+        #best_hospital$Hospital.Name
+        
+        best_hospital <-  best_hospital[order(best_hospital$Hospital.Name)]
+        best_hospital[1,]$Hospital.Name
+        
 }
